@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <!-- <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/LabelText" android:textColor="#000000" android:textStyle="bold" android:text="" android:layout_gravity="center_horizontal"></TextView> -->
+
+    <TextView
+        android:id="@+id/WhichPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ff3300"
+        android:textSize="20sp"
+        android:textStyle="bold" >
+    </TextView>
+
+    <EditText
+        android:id="@+id/EditText01"
+        android:layout_width="fill_parent"
+        android:layout_height="150dip"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/WhichPass"
+        android:autoText="false"
+        android:contentDescription="Words"
+        android:drawSelectorOnTop="true"
+        android:ems="10"
+        android:gravity="left|top"
+        android:hint="improved hypothesis appears here"
+        android:text="Result Text Here"
+        android:textSize="20dip" />
+
+    <EditText
+        android:id="@+id/EditText02"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:autoText="false"
+        android:contentDescription="Numbers"
+        android:drawSelectorOnTop="true"
+        android:ems="10"
+        android:gravity="left|top"
+        android:hint="Actual Punch Time"
+        android:inputType="date"
+        android:textSize="22dip" />
+
+    <TextView
+        android:id="@+id/PunchResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EditText01"
+        android:layout_centerHorizontal="true"
+        android:text="Punch Results" />
+
+    <TextView
+        android:id="@+id/PerformanceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EditText02"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="@string/performance_text" />
+
+    <Button
+        android:id="@+id/Button01"
+        android:layout_width="350sp"
+        android:layout_height="80sp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/PerformanceText"
+        android:layout_marginTop="24dp"
+        android:layout_weight="0"
+        android:text="Hold and Speak"
+        android:textSize="20sp" />
+
+</RelativeLayout>
