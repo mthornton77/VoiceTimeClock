@@ -80,7 +80,10 @@ public class PocketSphinxAndroidDemo extends Activity implements
 	EditText feedback;
 	EditText activeField;
 	String activeFieldStr = "";
+	PunchClass thisPunch;
 
+	private NotesDbAdapter mDbHelper;
+	
 	private ProgressDialog pd;
 	private final static String PS_DATA_PATH = Environment
 			.getExternalStorageDirectory()
@@ -133,6 +136,8 @@ public class PocketSphinxAndroidDemo extends Activity implements
 	/** Called when the activity is first created. */
 	public void onCreate(Bundle savedInstanceState) {
 
+		mDbHelper = new NotesDbAdapter(this);
+        mDbHelper.open();
 		final Context context = getApplicationContext();
 		CharSequence text = "Hello toast!";
 		final int duration = Toast.LENGTH_SHORT;
@@ -226,6 +231,7 @@ public class PocketSphinxAndroidDemo extends Activity implements
 				that.rec_dialog.dismiss();
 
 				if (hyp.contains("PUNCH")) {
+					//thisPunch = new PunchClass();
 					PunchClass.setPunch(hyp);
 					that.feedback.setText(PunchClass.getPunchTime());
 				} else {
