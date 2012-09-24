@@ -26,6 +26,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.*;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import edu.cmu.pocketsphinx.demo.PunchClass;
 
@@ -81,8 +82,9 @@ public class PocketSphinxAndroidDemo extends Activity implements
 	EditText activeField;
 	String activeFieldStr = "";
 	PunchClass thisPunch;
+	SQLiteDatabase db1 = null;
+	  private static String DBNAME = "data.sqlite";
 
-	private NotesDbAdapter mDbHelper;
 	
 	private ProgressDialog pd;
 	private final static String PS_DATA_PATH = Environment
@@ -136,8 +138,7 @@ public class PocketSphinxAndroidDemo extends Activity implements
 	/** Called when the activity is first created. */
 	public void onCreate(Bundle savedInstanceState) {
 
-		mDbHelper = new NotesDbAdapter(this);
-        mDbHelper.open();
+		
 		final Context context = getApplicationContext();
 		CharSequence text = "Hello toast!";
 		final int duration = Toast.LENGTH_SHORT;
@@ -146,7 +147,7 @@ public class PocketSphinxAndroidDemo extends Activity implements
 		this.setTitle(title);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		db1 = openOrCreateDatabase(DBNAME, Context.MODE_PRIVATE,null);
 		if (!Utility.pathExists(PS_DATA_PATH + "currentconf")) {
 			downloadData();
 		}
@@ -231,8 +232,8 @@ public class PocketSphinxAndroidDemo extends Activity implements
 				that.rec_dialog.dismiss();
 
 				if (hyp.contains("PUNCH")) {
-					//thisPunch = new PunchClass();
-					PunchClass.setPunch(hyp);
+					PunchClass thisPunch = new PunchClass();
+					thisPunch.setPunch(hyp, db1, getBaseContext());
 					that.feedback.setText(PunchClass.getPunchTime());
 				} else {
 					that.feedback.setText("No Method for Command");
@@ -265,7 +266,7 @@ public class PocketSphinxAndroidDemo extends Activity implements
 
 		case R.id.download_data:
 			downloadData();
-			// showFillerActivity();
+			// showFillerActivity()	PocketSphinxAndroidDemo;
 
 			return true;
 

@@ -2,24 +2,36 @@ package edu.cmu.pocketsphinx.demo;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import android.database.Cursor;
-import android.widget.SimpleCursorAdapter;
+import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.res.AssetManager;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 
-
-import edu.cmu.pocketsphinx.demo.NotesDbAdapter;
-
-
-public class PunchClass {
-
+public class PunchClass extends Activity {
+	
 	static String punchTime;
 	static int punchType;
-	public static NotesDbAdapter mDbHelper;
+	private static String DB_PATH = "/data/data/edu.cmu.pocketsphinx.demo/databases/";
+	 private static String DB_NAME = "data.sqlite";   
+
+	  
+	  @Override
+      public void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      setContentView(R.layout.main);
+}
 	
 	public static String getPunchTime() {
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+		DateFormat dateFormat = new SimpleDateFormat("HHmm");
 		Calendar calendar = Calendar.getInstance();
 		// get minute of "now"
 		calendar.setTime(new Date());
@@ -38,36 +50,46 @@ public class PunchClass {
 		return punchTime;
 	}
 
-	public static void setPunch(String hyp) {
+	public void setPunch(String hyp, SQLiteDatabase db1, Context context) {
 		
-        
 		if(hyp.equalsIgnoreCase("PUNCH IN")){
+			//Context context= getBaseContext();
 			punchType = 1;
-		}
-		
-		switch (punchType){
-		case 1:
-			punchTime = getPunchTime();
-			//fill db?
-			String aPunch = punchTime;
-	        mDbHelper.createNote(aPunch, "");
-	        fillData();
-		}
+			punchTime = getPunchTime();		
+			try {
+				copyDataBase(context);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			db1.execSQL("INSERT INTO notes VALUES ("+punchTime+", 6, 7)");
+	
+		} 	
 	}
-   
-    
-    private static void fillData() {
-        // Get all of the notes from the database and create the item list
-        Cursor c = mDbHelper.fetchAllNotes();
-        //startManagingCursor(c);
+	
+	 public void copyDataBase(Context context) throws IOException{
 
-        String[] from = new String[] { NotesDbAdapter.KEY_TITLE };
-        int[] to = new int[] { R.id.EditText02 };
-        
-        // Now create an array adapter and set it to display using our row
-        //SimpleCursorAdapter notes =
-           // new SimpleCursorAdapter(this, R.layout.notes_row, c, from, to);
-       // setListAdapter(notes);
-    }
+	            //Open your local db as the input stream
+		 InputStream myInput = context.getAssets().open(DB_NAME);
 
+	            // Path to the just created empty db
+	            String outFileName = DB_PATH + DB_NAME;
+
+	            //Open the empty db as the output stream
+	            OutputStream myOutput = new FileOutputStream(outFileName);
+
+	            //transfer bytes from the inputfile to the outputfile
+	            byte[] buffer = new byte[1024];
+	            int length;
+	            while ((length = myInput.read(buffer))>0){
+	                myOutput.write(buffer, 0, length);
+	            }
+
+	            //Close the streams
+	            myOutput.flush();
+	            myOutput.close();
+	            myInput.close();
+
+	        }//end of copyDataBase() method
 }
+	
