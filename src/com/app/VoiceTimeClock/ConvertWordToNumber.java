@@ -1,4 +1,4 @@
-package edu.cmu.pocketsphinx.demo;
+package com.app.VoiceTimeClock;
 import java.util.*;
  class ConvertWordToNumber {
     public static String WithSeparator(long number) {

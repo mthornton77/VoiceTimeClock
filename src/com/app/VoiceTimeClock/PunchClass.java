@@ -1,4 +1,4 @@
-package edu.cmu.pocketsphinx.demo;
+package com.app.VoiceTimeClock;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
+import com.app.VoiceTimeClock.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,7 +22,7 @@ public class PunchClass extends Activity {
 	
 	static String punchTime;
 	static int punchType;
-	private static String DB_PATH = "/data/data/edu.cmu.pocketsphinx.demo/databases/";
+	private static String DB_PATH = "/data/data/com.app.VoiceTimeClock/databases/";
 	 private static String DB_NAME = "data.sqlite";   
 
 	  

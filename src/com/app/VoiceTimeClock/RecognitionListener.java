@@ -1,4 +1,4 @@
-package edu.cmu.pocketsphinx.demo;
+package com.app.VoiceTimeClock;
 
 import android.os.Bundle;
 

@@ -1,8 +1,10 @@
-package edu.cmu.pocketsphinx.demo;
+package com.app.VoiceTimeClock;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import com.app.VoiceTimeClock.R;
 
 import android.app.Activity;
 import android.os.Bundle;

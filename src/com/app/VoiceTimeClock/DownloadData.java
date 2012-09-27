@@ -1,4 +1,4 @@
-package edu.cmu.pocketsphinx.demo;
+package com.app.VoiceTimeClock;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -13,6 +13,8 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.app.VoiceTimeClock.R;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

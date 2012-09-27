@@ -1,9 +1,11 @@
-package edu.cmu.pocketsphinx.demo;
+package com.app.VoiceTimeClock;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+
+import com.app.VoiceTimeClock.PunchClass;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,7 +30,7 @@ import android.widget.Toast;
 import android.content.*;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import edu.cmu.pocketsphinx.demo.PunchClass;
+import com.app.VoiceTimeClock.R;
 
 public class PocketSphinxAndroidDemo extends Activity implements
 		OnTouchListener, RecognitionListener {
